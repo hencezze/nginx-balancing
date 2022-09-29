@@ -1,0 +1,13 @@
+upstream balancer {
+  server web1:82 weight=5;
+  server web2:82 weight=5;
+  server backup:82 backup;
+}
+
+server {
+  listen 80;
+  server_name localhost;
+  location / {
+    proxy_pass http://balancer;
+  }
+}

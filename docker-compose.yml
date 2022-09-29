@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  web1:
+    image: localhost:5000/nodik
+    volumes:
+      - ./web1/server.js:/apt/node/server.js
+      - ./web1/package.json:/apt/package.json
+  web2:
+    image: localhost:5000/nodik
+    volumes:
+      - ./web2/server.js:/apt/node/server.js
+      - ./web2/package.json:/apt/package.json
+  backup:
+    image: localhost:5000/nodik
+    volumes:
+      - ./backup/server.js:/apt/node/server.js
+      - ./backup/package.json:/apt/package.json
+  nginx:
+    build: ./nginx
+    ports:
+    - '80:80'
+    depends_on:
+    - web1
+    - web2
+    - backup
