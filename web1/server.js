@@ -3,7 +3,7 @@ const redis = require('redis');
 const app = express();
 
 app.get('/', function(req, res) {
-        res.send('Im the first server');
+        res.send('Im the first(main) server');
 });
 
 app.listen(82, function()  {
